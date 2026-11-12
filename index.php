@@ -155,7 +155,7 @@ function e($value) {
         <div class="form-group">
             <label>URL Repositori GitHub (Opsional)</label>
             <input type="url" name="github"
-                placeholder="https://github.com/username/repo.git"
+                placeholder="https://github.com/username/repo"
                 value="<?php echo e(isset($old['github']) ? $old['github'] : ''); ?>">
             <?php if (isset($errors['github'])): ?>
                 <div class="error"><?php echo e($errors['github']); ?></div>
@@ -196,11 +196,6 @@ function e($value) {
             <?php if (isset($errors['peserta'])): ?>
                 <div class="error"><?php echo e($errors['peserta']); ?></div>
             <?php endif; ?>
-        </div>
-
-        <div class="form-group">
-            <label>Pesan (Opsional)</label>
-            <textarea name="pesan" rows="3"><?php echo e(isset($old['pesan']) ? $old['pesan'] : ''); ?></textarea>
         </div>
 
         <button type="submit" name="submit">Daftar Sekarang</button>

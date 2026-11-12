@@ -1,4 +1,3 @@
-
 <?php
 session_start();
 
@@ -47,8 +46,8 @@ if ($email === '') {
 // 3. Validasi Nomor HP menggunakan REGEXP
 if ($no_hp === '') {
     $errors['no_hp'] = 'Nomor HP wajib diisi.';
-} elseif (!preg_match('/^(08|628)[0-9]{8,11}$/', $no_hp)) {
-    $errors['no_hp'] = 'Nomor HP harus diawali 08 atau 628 dan berisi 10-14 digit.';
+} elseif (!preg_match('/^(08)[0-9]{8,11}$/', $no_hp)) {
+    $errors['no_hp'] = 'Nomor HP harus diawali 08 dan berisi 10-13 digit.';
 }
 
 // 4. Validasi Umur (17-19 tahun)

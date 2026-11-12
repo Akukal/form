@@ -8,16 +8,16 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 }
 
 // Mengambil data form
-$nama     = trim($_POST['nama'] ?? '');
-$email    = trim($_POST['email'] ?? '');
-$no_hp    = trim($_POST['no_hp'] ?? '');
-$umur     = trim($_POST['umur'] ?? '');
-$github   = trim($_POST['github'] ?? '');
-$kategori = $_POST['kategori'] ?? '';
-$peserta  = $_POST['peserta'] ?? '';
-$pesan    = trim($_POST['pesan'] ?? '');
+$nama     = isset($_POST['nama']) ? trim($_POST['nama']) : '';
+$email    = isset($_POST['email']) ? trim($_POST['email']) : '';
+$no_hp    = isset($_POST['no_hp']) ? trim($_POST['no_hp']) : '';
+$umur     = isset($_POST['umur']) ? trim($_POST['umur']) : '';
+$github   = isset($_POST['github']) ? trim($_POST['github']) : '';
+$kategori = isset($_POST['kategori']) ? $_POST['kategori'] : '';
+$peserta  = isset($_POST['peserta']) ? $_POST['peserta'] : '';
+$pesan    = isset($_POST['pesan']) ? trim($_POST['pesan']) : '';
 
-$data = [
+$data = array(
     'nama' => $nama,
     'email' => $email,
     'no_hp' => $no_hp,
@@ -26,9 +26,9 @@ $data = [
     'kategori' => $kategori,
     'peserta' => $peserta,
     'pesan' => $pesan
-];
+);
 
-$errors = [];
+$errors = array();
 
 // 1. Validasi Nama (3-50 karakter)
 if ($nama === '') {
@@ -67,18 +67,18 @@ if ($github !== '') {
 }
 
 // 6. Validasi Kategori menggunakan Whitelist
-$allowedKategori = [
+$allowedKategori = array(
     'Web Development',
     'Mobile Development',
     'UI/UX Design'
-];
+);
 
 if (!in_array($kategori, $allowedKategori, true)) {
     $errors['kategori'] = 'Kategori lomba tidak valid.';
 }
 
 // 7. Validasi Peserta menggunakan Whitelist
-$allowedPeserta = ['Individu', 'Tim'];
+$allowedPeserta = array('Individu', 'Tim');
 
 if (!in_array($peserta, $allowedPeserta, true)) {
     $errors['peserta'] = 'Jenis peserta tidak valid.';

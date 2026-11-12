@@ -2,9 +2,9 @@
 <?php
 session_start();
 
-$old = $_SESSION['old'] ?? [];
-$errors = $_SESSION['errors'] ?? [];
-$success = $_SESSION['success'] ?? false;
+$old = isset($_SESSION['old']) ? $_SESSION['old'] : array();
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : array();
+$success = isset($_SESSION['success']) ? $_SESSION['success'] : false;
 
 unset($_SESSION['old'], $_SESSION['errors'], $_SESSION['success']);
 
@@ -118,47 +118,47 @@ function e($value) {
         <div class="form-group">
             <label>Nama *</label>
             <input type="text" name="nama"
-                value="<?= e($old['nama'] ?? '') ?>">
+                value="<?php echo e(isset($old['nama']) ? $old['nama'] : ''); ?>">
             <?php if (isset($errors['nama'])): ?>
-                <div class="error"><?= e($errors['nama']) ?></div>
+                <div class="error"><?php echo e($errors['nama']); ?></div>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label>Email *</label>
             <input type="email" name="email"
-                value="<?= e($old['email'] ?? '') ?>">
+                value="<?php echo e(isset($old['email']) ? $old['email'] : ''); ?>">
             <?php if (isset($errors['email'])): ?>
-                <div class="error"><?= e($errors['email']) ?></div>
+                <div class="error"><?php echo e($errors['email']); ?></div>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
-            <label>Nomor HP *</label>
+            <label>Nomor HP</label>
             <input type="text" name="no_hp"
                 placeholder="08xxxxxxxxxx"
-                value="<?= e($old['no_hp'] ?? '') ?>">
+                value="<?php echo e(isset($old['no_hp']) ? $old['no_hp'] : ''); ?>">
             <?php if (isset($errors['no_hp'])): ?>
-                <div class="error"><?= e($errors['no_hp']) ?></div>
+                <div class="error"><?php echo e($errors['no_hp']); ?></div>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label>Umur *</label>
             <input type="number" name="umur"
-                value="<?= e($old['umur'] ?? '') ?>">
+                value="<?php echo e(isset($old['umur']) ? $old['umur'] : ''); ?>">
             <?php if (isset($errors['umur'])): ?>
-                <div class="error"><?= e($errors['umur']) ?></div>
+                <div class="error"><?php echo e($errors['umur']); ?></div>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label>URL Repositori GitHub (Opsional)</label>
             <input type="url" name="github"
-                placeholder="https://github.com/username"
-                value="<?= e($old['github'] ?? '') ?>">
+                placeholder="https://github.com/username/repo.git"
+                value="<?php echo e(isset($old['github']) ? $old['github'] : ''); ?>">
             <?php if (isset($errors['github'])): ?>
-                <div class="error"><?= e($errors['github']) ?></div>
+                <div class="error"><?php echo e($errors['github']); ?></div>
             <?php endif; ?>
         </div>
 
@@ -167,40 +167,40 @@ function e($value) {
             <select name="kategori">
                 <option value="">-- Pilih Kategori --</option>
                 <?php
-                $kategori = ['Web Development', 'Mobile Development', 'UI/UX Design'];
+                $kategori = array('Web Development', 'Mobile Development', 'UI/UX Design');
                 foreach ($kategori as $item):
                 ?>
-                    <option value="<?= e($item) ?>"
-                        <?= ($old['kategori'] ?? '') === $item ? 'selected' : '' ?>>
-                        <?= e($item) ?>
+                    <option value="<?php echo e($item); ?>"
+                        <?php echo (isset($old['kategori']) && $old['kategori'] === $item) ? 'selected' : ''; ?>>
+                        <?php echo e($item); ?>
                     </option>
                 <?php endforeach; ?>
             </select>
             <?php if (isset($errors['kategori'])): ?>
-                <div class="error"><?= e($errors['kategori']) ?></div>
+                <div class="error"><?php echo e($errors['kategori']); ?></div>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label>Jenis Peserta *</label>
             <div class="radio-group">
-                <?php foreach (['Individu', 'Tim'] as $item): ?>
+                <?php foreach (array('Individu', 'Tim') as $item): ?>
                     <label>
                         <input type="radio" name="peserta"
-                            value="<?= e($item) ?>"
-                            <?= ($old['peserta'] ?? '') === $item ? 'checked' : '' ?>>
-                        <?= e($item) ?>
+                            value="<?php echo e($item); ?>"
+                            <?php echo (isset($old['peserta']) && $old['peserta'] === $item) ? 'checked' : ''; ?>>
+                        <?php echo e($item); ?>
                     </label>
                 <?php endforeach; ?>
             </div>
             <?php if (isset($errors['peserta'])): ?>
-                <div class="error"><?= e($errors['peserta']) ?></div>
+                <div class="error"><?php echo e($errors['peserta']); ?></div>
             <?php endif; ?>
         </div>
 
         <div class="form-group">
             <label>Pesan (Opsional)</label>
-            <textarea name="pesan" rows="3"><?= e($old['pesan'] ?? '') ?></textarea>
+            <textarea name="pesan" rows="3"><?php echo e(isset($old['pesan']) ? $old['pesan'] : ''); ?></textarea>
         </div>
 
         <button type="submit" name="submit">Daftar Sekarang</button>
